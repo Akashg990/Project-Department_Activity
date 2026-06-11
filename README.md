@@ -161,8 +161,8 @@ Department-Activity-Tracker
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/department-activity-tracker.git
-cd department-activity-tracker
+git clone https://github.com/Akashg990/Project-Department_Activity.git
+cd Department-Activity-tracker
 ```
 
 ---
