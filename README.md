@@ -251,12 +251,7 @@ npm run dev
 * Upload Activity Images
 * Generate Reports
 
-### Student
 
-* View Activities
-* Track Upcoming Events
-* Track Ongoing Events
-* Track Completed Events
 
 ---
 
