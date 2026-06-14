@@ -87,7 +87,7 @@ const handleDelete = async (id) => {
 
     await axios.delete(
 
-      `http://localhost:5000/api/report-archives/${id}`,
+      `/report-archives/${id}`,
 
       {
 
