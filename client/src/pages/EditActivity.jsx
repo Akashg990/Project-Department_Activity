@@ -333,7 +333,7 @@ form.append(
         form.append("images", image);
       });
 
-      await axios.put(`http://localhost:5000/api/activities/${id}`, form, {
+      await axios.put(`/activities/${id}`, form, {
         headers: {
           Authorization: `Bearer ${user.token}`,
           "Content-Type": "multipart/form-data",
