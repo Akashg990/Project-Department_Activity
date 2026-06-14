@@ -72,7 +72,7 @@ export default function Activities() {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/activities/${selectedActivityId}`,
+        `/activities/${selectedActivityId}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
