@@ -32,7 +32,7 @@ const [showModal, setShowModal] = useState(false);
     try {
 
       const response = await axios.get(
-        "http://localhost:5000/api/report-archives",
+        "/report-archives",
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

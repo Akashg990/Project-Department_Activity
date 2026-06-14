@@ -45,7 +45,7 @@ export default function AddAchievementModal({
 
     try {
       await axios.post(
-        "http://localhost:5000/api/achievements",
+        "/achievements",
         formData,
         {
           headers: {

@@ -171,7 +171,7 @@ form.set("club", finalClub);
         form.append("images", image);
       });
 
-      await axios.post("http://localhost:5000/api/activities", form, {
+      await axios.post("/activities", form, {
         headers: {
           Authorization: `Bearer ${user.token}`,
           "Content-Type": "multipart/form-data",

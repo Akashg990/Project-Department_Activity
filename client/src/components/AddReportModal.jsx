@@ -48,7 +48,7 @@ export default function AddReportModal({
 
       await axios.post(
 
-        "http://localhost:5000/api/report-archives",
+        "/report-archives",
 
         formData,
 

@@ -28,7 +28,7 @@ export default function ForgotPassword() {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:5000/api/auth/send-reset-otp",
+        "/auth/send-reset-otp",
         { email }
       );
 

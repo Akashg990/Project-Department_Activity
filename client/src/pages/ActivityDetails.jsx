@@ -37,7 +37,7 @@ export default function ActivityDetails() {
       const response =
         await axios.get(
 
-          `http://localhost:5000/api/activities/${id}`,
+          `/activities/${id}`,
 
           {
 

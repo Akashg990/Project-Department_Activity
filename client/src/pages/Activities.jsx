@@ -41,7 +41,7 @@ export default function Activities() {
     try {
       setLoading(true);
 
-      const response = await axios.get("http://localhost:5000/api/activities", {
+      const response = await axios.get("/activities", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

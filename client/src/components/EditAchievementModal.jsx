@@ -49,7 +49,7 @@ export default function EditAchievementModal({
 
     try {
       await axios.put(
-        `http://localhost:5000/api/achievements/${achievement._id}`,
+        `/achievements/${achievement._id}`,
         formData,
         {
           headers: {

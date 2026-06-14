@@ -38,7 +38,7 @@ const [sortOrder, setSortOrder] = useState("asc");
   const fetchReportsData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/activities/stats/dashboard?year=${selectedYear}`,
+        `/activities/stats/dashboard?year=${selectedYear}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

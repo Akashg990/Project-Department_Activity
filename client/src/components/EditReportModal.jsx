@@ -42,7 +42,7 @@ export default function EditReportModal({
 
     try {
       await axios.put(
-        `http://localhost:5000/api/report-archives/${report._id}`,
+        `/report-archives/${report._id}`,
         formData,
         {
           headers: {
