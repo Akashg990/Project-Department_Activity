@@ -60,7 +60,7 @@ export default function ForgotPassword() {
 
       const response =
         await axios.post(
-          "http://localhost:5000/api/auth/verify-otp",
+          "/auth/verify-otp",
           {
             email,
             otp,
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
+        "/auth/reset-password",
         {
           email,
           password:
