@@ -9,6 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const { setUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,22 +23,34 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const data = await loginUser(formData);
+  setLoading(true);
 
-      localStorage.setItem("user", JSON.stringify(data));
+  try {
+    const data = await loginUser(formData);
 
-      setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
 
-      navigate("/dashboard");
-      toast.success("Login Successfully");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
+    setUser(data);
+
+    toast.success("Login Successfully");
+
+    navigate("/dashboard");
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message || "Login Failed"
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -141,25 +154,41 @@ export default function Login() {
             </Link>
           </div>
 
-          <button
-            className="
-              w-full
-              bg-gradient-to-r
-              from-blue-600
-              to-indigo-600
-              text-white
-              p-3
-              rounded-xl
-              font-semibold
-              shadow-lg
-              hover:shadow-xl
-              hover:scale-[1.02]
-              transition-all
-              duration-200
-            "
-          >
-            Login
-          </button>
+         <button
+  type="submit"
+  disabled={loading}
+  className={`
+    w-full
+    bg-gradient-to-r
+    from-blue-600
+    to-indigo-600
+    text-white
+    p-3
+    rounded-xl
+    font-semibold
+    shadow-lg
+    transition-all
+    duration-200
+    flex
+    justify-center
+    items-center
+    gap-2
+    ${
+      loading
+        ? "opacity-80 cursor-not-allowed"
+        : "hover:shadow-xl hover:scale-[1.02]"
+    }
+  `}
+>
+  {loading ? (
+    <>
+      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      Signing In...
+    </>
+  ) : (
+    "Login"
+  )}
+</button>
 
         </form>
 

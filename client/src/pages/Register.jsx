@@ -10,6 +10,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   const { setUser } = useContext(AuthContext);
+  const [verifyLoading, setVerifyLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -70,49 +71,75 @@ export default function Register() {
     }
   };
 
-  const sendOtp = async () => {
-    if (!formData.email) {
-      toast.error("Please enter email first");
-      return;
-    }
+const sendOtp = async () => {
+  if (!formData.email) {
+    toast.error("Please enter email first");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      await axios.post("http://localhost:5000/api/auth/send-otp", {
+  setLoading(true);
+
+  try {
+    await axios.post("/auth/send-otp", {
+      email: formData.email,
+    });
+
+    toast.success("OTP sent successfully");
+
+    setOtpSent(true);
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message ||
+        "OTP sending failed"
+    );
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
+
+ const verifyOtp = async () => {
+
+  setVerifyLoading(true);
+
+  try {
+
+    const response = await axios.post(
+      "/auth/verify-otp",
+      {
         email: formData.email,
-      });
+        otp,
+      }
+    );
 
-      toast.success("OTP sent successfully");
+    if (response.data.verified) {
 
-      setOtpSent(true);
-    } catch (error) {
-      console.log(error);
+      setOtpVerified(true);
 
-      toast.error(error.response?.data?.message || "OTP sending failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const verifyOtp = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/verify-otp",
-        {
-          email: formData.email,
-          otp,
-        },
+      toast.success(
+        "Email verified successfully"
       );
 
-      if (response.data.verified) {
-        setOtpVerified(true);
-
-        toast.success("Email verified successfully");
-      }
-    } catch (error) {
-      toast.error(error.response?.data?.message);
     }
-  };
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message ||
+        "OTP verification failed"
+    );
+
+  } finally {
+
+    setVerifyLoading(false);
+
+  }
+
+};
 
   return (
     <>
@@ -168,21 +195,36 @@ export default function Register() {
                 className="flex-1 border border-gray-300 p-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition"
               />
 
-              <button
-                type="button"
-                onClick={sendOtp}
-                disabled={loading || otpVerified}
-                className="
-                  px-4
-                  bg-blue-600
-                  text-white
-                  rounded-xl
-                  hover:bg-blue-700
-                  transition
-                "
-              >
-                {loading ? "..." : "OTP"}
-              </button>
+             <button
+  type="button"
+  onClick={sendOtp}
+  disabled={loading || otpVerified}
+  className={`
+    min-w-[110px]
+    bg-blue-600
+    text-white
+    rounded-xl
+    flex
+    justify-center
+    items-center
+    gap-2
+    transition
+    ${
+      loading || otpVerified
+        ? "opacity-70 cursor-not-allowed"
+        : "hover:bg-blue-700"
+    }
+  `}
+>
+  {loading ? (
+    <>
+      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      Sending...
+    </>
+  ) : (
+    "Send OTP"
+  )}
+</button>
 
             </div>
           </div>
@@ -207,21 +249,37 @@ export default function Register() {
                 className="w-full border border-gray-300 p-3 rounded-xl"
               />
 
-              <button
-                type="button"
-                onClick={verifyOtp}
-                className="
-                  w-full
-                  bg-green-600
-                  text-white
-                  p-3
-                  rounded-xl
-                  hover:bg-green-700
-                  transition
-                "
-              >
-                Verify OTP
-              </button>
+             <button
+  type="button"
+  onClick={verifyOtp}
+  disabled={verifyLoading}
+  className={`
+    w-full
+    bg-green-600
+    text-white
+    p-3
+    rounded-xl
+    flex
+    justify-center
+    items-center
+    gap-2
+    transition
+    ${
+      verifyLoading
+        ? "opacity-80 cursor-not-allowed"
+        : "hover:bg-green-700"
+    }
+  `}
+>
+  {verifyLoading ? (
+    <>
+      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      Verifying...
+    </>
+  ) : (
+    "Verify OTP"
+  )}
+</button>
 
             </div>
 
@@ -265,6 +323,7 @@ export default function Register() {
           </div>
 
           <button
+          type="submit"
             disabled={regloading}
             className="
               w-full
