@@ -6,8 +6,7 @@ export const sendOTPEmail = async (email, otp) => {
 
   await resend.emails.send({
 
-    from:
-      "DeptTrack <onboarding@resend.dev>",
+  from: "DeptTrack <noreply@depttrack.xyz>"
 
     to: email,
 
