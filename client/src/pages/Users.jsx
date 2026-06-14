@@ -42,7 +42,7 @@ export default function Users() {
   const approveUser = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/users/approve/${id}`,
+        `/users/approve/${id}`,
         {},
         {
           headers: {
@@ -63,7 +63,7 @@ export default function Users() {
 
   const deleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${selectedUserId}`, {
+      await axios.delete(`/users/${selectedUserId}`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
