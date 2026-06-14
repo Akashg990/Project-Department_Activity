@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 
 import toast from "react-hot-toast";
 
@@ -745,6 +745,7 @@ className="border border-gray-200 p-3 rounded-xl"
             placeholder="Participants"
             value={formData.participants}
             onChange={handleChange}
+             onWheel={(e) => e.target.blur()}
             className="border
   border-gray-200
   p-3

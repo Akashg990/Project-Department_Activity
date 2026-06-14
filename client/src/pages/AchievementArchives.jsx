@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 import AddAchievementModal from "../components/AddAchievementModal";

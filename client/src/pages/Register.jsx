@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 
 import { registerUser } from "../services/authService";
 import { AuthContext } from "../context/AuthContext";

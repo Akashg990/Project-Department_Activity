@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddReportModal from "../components/AddReportModal";
 import EditReportModal from "../components/EditReportModal";
@@ -281,7 +281,7 @@ duration-300
     rel="noreferrer"
     className="
     flex-1
-    w-10
+    
     bg-gradient-to-r
     from-green-600
     to-emerald-600

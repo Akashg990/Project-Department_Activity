@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import toast from "react-hot-toast";
 
 import {

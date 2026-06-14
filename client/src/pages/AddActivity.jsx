@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../layouts/DashboardLayout";
 import toast from "react-hot-toast";
@@ -445,7 +445,7 @@ form.set("club", finalClub);
           >
             <option value="">Select Academic Year</option>
 
-            <option value="2023-24">2023-24</option>
+            
 
             <option value="2024-25">2024-25</option>
 
@@ -527,12 +527,13 @@ form.set("club", finalClub);
 />
 
           <input
-            type="number"
-            min={0}
-            name="participants"
-            placeholder="Participants"
-            value={formData.participants}
-            onChange={handleChange}
+             type="number"
+             min={0}
+             placeholder="Enter Participants"
+  name="participants"
+  value={formData.participants}
+  onChange={handleChange}
+  onWheel={(e) => e.target.blur()}
             className="border
   border-gray-200
   p-3
